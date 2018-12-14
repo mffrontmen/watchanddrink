@@ -1,33 +1,53 @@
 <template>
-    <div id="main">
-        <ul>
-            <li
-              v-for="({ id, name }, key) in movieList"
-              :key="key"
-            >
-							{{name}}
-            </li>
-						<hr>
-						<li
-              v-for="({ id, name }, key) in drinksList"
-              :key="key"
-            >
-							{{name}}
-            </li>
-        </ul>
-    </div>
+  <div id="main">
+		<div class="main_header">
+			<Input
+				name="search-box"
+				type="string"
+				@handleInput="handleInput"
+			/>
+			<Btn
+				title="Advice me drink"
+				@handleClick="handleSearch"
+			/>
+		</div>
+	</div>
 </template>
 
 <script>
-    export default {
-        name: 'Main',
-        data: () => ({
-            movieList: [
-                { id: 1, name: 'Titanic' }
-						],
-						drinksList: [
-							{ id: 1, name: 'Red Vine', movie_id: 1 }
-						]
-        })
-    }
+import Btn from '@/components/Button'
+import Input from '@/components/Input'
+
+export default {
+  name: "Main",
+  data: () => ({
+    movieList: [{ id: 1, name: "Titanic" }],
+    drinksList: [{ id: 1, name: "Red Vine", movie_id: 1 }]
+	}),
+	components: {
+		Btn,
+		Input
+	},
+	methods: {
+		handleInput({ name, value }) {
+			console.log(name, value)
+		},
+		handleSearch() {
+			console.log('start searching')
+		}
+	}
+};
 </script>
+
+<style >
+	#main {
+		display: flex;
+    justify-content: center;
+	}
+
+	.main_header {
+		display: flex;
+		border-bottom: 2px solid;
+    padding-bottom: 20px;
+	}
+</style>
