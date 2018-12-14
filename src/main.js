@@ -2,11 +2,12 @@ import Vue from 'vue'
 import Main from './pages/Main'
 import VueApollo from "vue-apollo"
 import { ApolloClient } from 'apollo-client'
-import { HttpLink } from 'apollo-link-http'
+import { RestLink } from 'apollo-link-rest'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-
-const httpLink = new HttpLink({
-  uri: 'https://api.punkapi.com/v2/beers',
+// HTTP connexion to the API
+const httpLink = new RestLink({
+  // You should use an absolute URL here
+  uri: 'https://api.punkapi.com/v2/'
 })
 
 // Cache implementation
@@ -15,7 +16,7 @@ const cache = new InMemoryCache()
 // Create the apollo client
 const apolloClient = new ApolloClient({
   link: httpLink,
-  cache,
+  cache
 })
 
 Vue.use(VueApollo)
@@ -28,6 +29,5 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(Main),
-  // Apollo GraphQL
   apolloProvider
 }).$mount('#app')

@@ -14,8 +14,7 @@ export default {
   name: "button",
   props: {
     title: {
-      default: String,
-      type: ""
+      default: String
     }
   },
   methods: {

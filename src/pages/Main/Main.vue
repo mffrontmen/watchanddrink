@@ -1,8 +1,25 @@
 <template>
   <div id="main">
     <div class="main_header">
-      <Input name="search-box" type="string" @handleInput="handleInput"/>
-      <Btn title="Advice me drink" @handleClick="handleSearch"/>
+      <Input
+        name="search-box"
+        type="string"
+        @handleInput="handleInput"
+      />
+      <Btn
+        title="Advice me drink"
+        @handleClick="handleSearch"
+      />
+    </div>
+    <div class="main_content">
+      <ul>
+        <li
+          v-for="({ id, name }, key) in drinksList"
+          :key="key"
+        >
+          {{id}} - {{name}}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -10,33 +27,23 @@
 <script>
 import Btn from "@/components/Button";
 import Input from "@/components/Input";
-import gql from "graphql-tag";
-
-const DRINKS_QUERY = gql`
-  query {
-    allUsers {
-      id
-      name
-      age
-      job
-    }
-  }
-`;
+import { DRINKS_QUERY } from "@/graphql/drinks";
 
 export default {
   name: "Main",
   data: () => ({
     movieList: [{ id: 1, name: "Titanic" }],
-    drinksList: [{ id: 1, name: "Red Vine", movie_id: 1 }]
+    drinksList: []
   }),
   components: {
     Btn,
     Input
   },
   apollo: {
-    drinks: {
-      query: DRINKS_QUERY,
-      loadingKey: "loading"
+    beers() {
+      return {
+        query: DRINKS_QUERY
+      }
     }
   },
   methods: {
