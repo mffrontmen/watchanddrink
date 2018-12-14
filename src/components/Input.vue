@@ -1,6 +1,11 @@
 <template>
   <div class="input">
-    <input :type="type" :name="name">
+    <input
+      class="field"
+      :type="type"
+      :name="name"
+      @input="handleInput"
+    />
   </div>
 </template>
 
@@ -27,3 +32,13 @@ export default {
   }
 };
 </script>
+
+<style>
+  .field {
+    height: 40px;
+    width: 400px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 24px;
+  }
+</style>
