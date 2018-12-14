@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Main from './pages/Main'
+import VueApollo from 'apollo-boost'
+
 
 Vue.config.productionTip = false
 
